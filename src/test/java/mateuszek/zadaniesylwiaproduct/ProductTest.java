@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -26,7 +27,7 @@ public class ProductTest {
     private MockMvc mockMvc;
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @AfterEach
     public void tearDown() {
@@ -61,7 +62,7 @@ public class ProductTest {
                 .replace("{name}", productName);
         mockMvc.perform(
                 post("/product/addproduct").contentType(MediaType.APPLICATION_JSON)
-                .content(productJson))
+                        .content(productJson))
                 .andExpect(status().isOk());
 
     }
